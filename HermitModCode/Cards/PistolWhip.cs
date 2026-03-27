@@ -14,20 +14,21 @@ public class PistolWhip() : HermitCard(1, CardType.Attack, CardRarity.Common, Ta
     private const int Dmg = 6;
     private const int UpgradeDmg = 3;
     private const int BruiseAmt = 2;
-    private const int UpgradeBruise = 1;
+    private const int UpgradedBruiseAmt = 3;
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar((decimal)Dmg, ValueProp.Move), new PowerVar<BruisePower>((decimal)BruiseAmt)];
+
+    private int CurrentBruise => IsUpgraded ? UpgradedBruiseAmt : BruiseAmt;
 
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay play)
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Attack", Owner.Character.AttackAnimDelay);
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(play.Target).Execute(ctx);
-        await PowerCmd.Apply<BruisePower>(play.Target, DynamicVars.Cards.BaseValue, Owner.Creature, this);
+        await PowerCmd.Apply<BruisePower>(play.Target, CurrentBruise, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(UpgradeDmg);
-        DynamicVars.Cards.UpgradeValueBy(UpgradeBruise);
     }
 }

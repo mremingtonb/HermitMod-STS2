@@ -14,9 +14,11 @@ public class Feint() : HermitCard(1, CardType.Skill, CardRarity.Common, TargetTy
     private const int Blk = 6;
     private const int UpgradeBlk = 3;
     private const int BruiseAmt = 2;
-    private const int UpgradeBruise = 1;
+    private const int UpgradedBruiseAmt = 3;
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar((decimal)Blk, ValueProp.Move), new PowerVar<BruisePower>((decimal)BruiseAmt)];
+
+    private int CurrentBruise => IsUpgraded ? UpgradedBruiseAmt : BruiseAmt;
 
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay play)
     {
@@ -26,13 +28,12 @@ public class Feint() : HermitCard(1, CardType.Skill, CardRarity.Common, TargetTy
         // Apply Bruise to ALL enemies
         foreach (var enemy in CombatState.HittableEnemies)
         {
-            await PowerCmd.Apply<BruisePower>(enemy, DynamicVars.Cards.BaseValue, Owner.Creature, this);
+            await PowerCmd.Apply<BruisePower>(enemy, CurrentBruise, Owner.Creature, this);
         }
     }
 
     protected override void OnUpgrade()
     {
         DynamicVars.Block.UpgradeValueBy(UpgradeBlk);
-        DynamicVars.Cards.UpgradeValueBy(UpgradeBruise);
     }
 }

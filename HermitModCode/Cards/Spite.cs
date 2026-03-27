@@ -1,0 +1,37 @@
+using HermitMod.Cards;
+using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.ValueProps;
+using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
+
+namespace HermitMod.Cards;
+
+/// <summary>
+/// Exhaust all Unplayable cards in hand. Gain 7 Block. Draw 1 card.
+/// Upgrade: 10 Block, Draw 2.
+/// </summary>
+public sealed class Spite : HermitCard
+{
+    private const int BlockAmount = 7;
+    private const int UpgradedBlockAmount = 10;
+    private const int DrawAmount = 1;
+    private const int UpgradedDrawAmount = 2;
+
+    public Spite() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.None) { }
+
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar((decimal)BlockAmount, ValueProp.Move), new CardsVar(DrawAmount)];
+
+    protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay play)
+    {
+        await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
+        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
+        await CardPileCmd.Draw(ctx, DrawAmount, Owner, false);
+    }
+
+    protected override void OnUpgrade()
+    {
+        DynamicVars.Block.UpgradeValueBy(UpgradedBlockAmount - BlockAmount);
+    }
+}

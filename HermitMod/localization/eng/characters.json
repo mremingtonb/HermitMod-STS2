@@ -1,0 +1,17 @@
+{
+  "HERMITMOD-HERMIT.title": "The Hermit",
+  "HERMITMOD-HERMIT.titleObject": "Hermit",
+  "HERMITMOD-HERMIT.description": "[gold]Gunslinger[/gold]: A mysterious wanderer who fights from the shadows.\nUses Dead On mechanics, Bruise debuffs, and curse synergy.",
+  "HERMITMOD-HERMIT.pronounSubject": "they",
+  "HERMITMOD-HERMIT.pronounObject": "them",
+  "HERMITMOD-HERMIT.possessiveAdjective": "their",
+  "HERMITMOD-HERMIT.pronounPossessive": "theirs",
+  "HERMITMOD-HERMIT.goldMonologue": "[sine]These coins... could buy some ammunition...[/sine]",
+  "HERMITMOD-HERMIT.eventDeathPrevention": "Not yet... I still have unfinished business...",
+  "HERMITMOD-HERMIT.aromaPrinciple": "[sine][blue]...the scent of gunpowder...[/blue][/sine]",
+  "HERMITMOD-HERMIT.cardsModifierTitle": "Hermit",
+  "HERMITMOD-HERMIT.cardsModifierDescription": "Hermit cards will now appear in rewards and shops.",
+  "HERMITMOD-HERMIT.banter.alive.endTurnPing": "...",
+  "HERMITMOD-HERMIT.banter.dead.endTurnPing": "...",
+  "HERMITMOD-HERMIT.unlockText": "Play a run with [pink]{Prerequisite}[/pink] to unlock this character."
+}

@@ -1,0 +1,20 @@
+# Godot build artifacts
+.godot/
+*.import
+
+# .NET build artifacts
+obj/
+bin/
+
+# IDE
+.vs/
+*.user
+*.suo
+
+# Deployed mod files (built outputs)
+*.pck
+*.dll
+
+# OS files
+Thumbs.db
+.DS_Store

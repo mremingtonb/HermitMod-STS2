@@ -125,7 +125,7 @@ public static class HermitVisualBuilder
         head.AddChild(hat);
         hat.Owner = root;
 
-        var eye = CreateSprite("Eye", CharDir + "eye.png", new Vector2(5, 2));
+        var eye = CreateSprite("Eye", CharDir + "eye.png", new Vector2(5, 4));
         head.AddChild(eye);
         eye.Owner = root;
 
@@ -140,6 +140,15 @@ public static class HermitVisualBuilder
         var animPlayer = CreateAnimationPlayer(waist, head, leftArm, gun, rightArm, visuals, corpse);
         root.AddChild(animPlayer);
         animPlayer.Owner = root;
+
+        // Return to idle after any one-shot animation finishes
+        animPlayer.AnimationFinished += (Godot.StringName animName) =>
+        {
+            if (animName != "idle" && animName != "die")
+            {
+                animPlayer.Play("idle");
+            }
+        };
 
         // Auto-start idle
         animPlayer.CallDeferred("play", "idle");

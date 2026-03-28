@@ -92,27 +92,27 @@ public static class HermitVisualBuilder
         waist.AddChild(body);
         body.Owner = root;
 
-        // Right arm
-        var rightArm = CreateSprite("RightArm", CharDir + "right_hand.png", new Vector2(50, -45));
+        // Right arm (behind body, mostly hidden)
+        var rightArm = CreateSprite("RightArm", CharDir + "right_hand.png", new Vector2(40, -50));
         rightArm.Rotation = 0.264f;
         waist.AddChild(rightArm);
         rightArm.Owner = root;
 
-        // Left arm (pivot for gun)
+        // Left arm (pivot for gun — raised near face level)
         var leftArm = new Node2D();
         leftArm.Name = "LeftArm";
-        leftArm.Position = new Vector2(-50, -25);
-        leftArm.Rotation = -0.3f;
+        leftArm.Position = new Vector2(-42, -72);
+        leftArm.Rotation = -0.15f;
         waist.AddChild(leftArm);
         leftArm.Owner = root;
 
-        var handGun = CreateSprite("HandGun", CharDir + "hand_gun.png", new Vector2(0, -8));
+        var handGun = CreateSprite("HandGun", CharDir + "hand_gun.png", new Vector2(0, -5));
         leftArm.AddChild(handGun);
         handGun.Owner = root;
 
-        var gun = CreateSprite("Gun", CharDir + "gun.png", new Vector2(-22, -42));
-        gun.Rotation = 0.4f;
-        gun.Scale = new Vector2(0.81f, 0.81f);
+        var gun = CreateSprite("Gun", CharDir + "gun.png", new Vector2(-18, -28));
+        gun.Rotation = 0.3f;
+        gun.Scale = new Vector2(0.85f, 0.85f);
         leftArm.AddChild(gun);
         gun.Owner = root;
 
@@ -219,17 +219,17 @@ public static class HermitVisualBuilder
         t = anim.AddTrack(Animation.TrackType.Value);
         anim.TrackSetPath(t, "Visuals/Waist/LeftArm:position");
         anim.TrackSetInterpolationType(t, Animation.InterpolationType.Cubic);
-        anim.TrackInsertKey(t, 0f, new Vector2(-50, -25));
-        anim.TrackInsertKey(t, 0.8333f, new Vector2(-54.42f, -33.85f));
-        anim.TrackInsertKey(t, 1.6666f, new Vector2(-50, -25));
+        anim.TrackInsertKey(t, 0f, new Vector2(-42, -72));
+        anim.TrackInsertKey(t, 0.8333f, new Vector2(-46, -78));
+        anim.TrackInsertKey(t, 1.6666f, new Vector2(-42, -72));
 
         // Left arm rotation
         t = anim.AddTrack(Animation.TrackType.Value);
         anim.TrackSetPath(t, "Visuals/Waist/LeftArm:rotation");
         anim.TrackSetInterpolationType(t, Animation.InterpolationType.Cubic);
-        anim.TrackInsertKey(t, 0f, -0.3f);
-        anim.TrackInsertKey(t, 0.8333f, -0.573f);
-        anim.TrackInsertKey(t, 1.6666f, -0.3f);
+        anim.TrackInsertKey(t, 0f, -0.15f);
+        anim.TrackInsertKey(t, 0.8333f, -0.35f);
+        anim.TrackInsertKey(t, 1.6666f, -0.15f);
 
         // Right arm rotation
         t = anim.AddTrack(Animation.TrackType.Value);
@@ -318,10 +318,10 @@ public static class HermitVisualBuilder
         t = anim.AddTrack(Animation.TrackType.Value);
         anim.TrackSetPath(t, "Visuals/Waist/LeftArm:rotation");
         anim.TrackSetInterpolationType(t, Animation.InterpolationType.Cubic);
-        anim.TrackInsertKey(t, 0f, -0.3f);
-        anim.TrackInsertKey(t, 0.1f, 0.4f);
-        anim.TrackInsertKey(t, 0.15f, 0.5f);
-        anim.TrackInsertKey(t, 0.5f, -0.3f);
+        anim.TrackInsertKey(t, 0f, -0.15f);
+        anim.TrackInsertKey(t, 0.1f, 0.3f);
+        anim.TrackInsertKey(t, 0.15f, 0.4f);
+        anim.TrackInsertKey(t, 0.5f, -0.15f);
 
         // Gun kicks back
         t = anim.AddTrack(Animation.TrackType.Value);
@@ -361,16 +361,16 @@ public static class HermitVisualBuilder
         t = anim.AddTrack(Animation.TrackType.Value);
         anim.TrackSetPath(t, "Visuals/Waist/LeftArm:rotation");
         anim.TrackSetInterpolationType(t, Animation.InterpolationType.Cubic);
-        anim.TrackInsertKey(t, 0f, -0.3f);
-        anim.TrackInsertKey(t, 0.15f, -0.8f);
-        anim.TrackInsertKey(t, 0.6f, -0.3f);
+        anim.TrackInsertKey(t, 0f, -0.15f);
+        anim.TrackInsertKey(t, 0.15f, -0.6f);
+        anim.TrackInsertKey(t, 0.6f, -0.15f);
 
         t = anim.AddTrack(Animation.TrackType.Value);
         anim.TrackSetPath(t, "Visuals/Waist/LeftArm:position");
         anim.TrackSetInterpolationType(t, Animation.InterpolationType.Cubic);
-        anim.TrackInsertKey(t, 0f, new Vector2(-50, -25));
-        anim.TrackInsertKey(t, 0.15f, new Vector2(-50, -45));
-        anim.TrackInsertKey(t, 0.6f, new Vector2(-50, -25));
+        anim.TrackInsertKey(t, 0f, new Vector2(-42, -72));
+        anim.TrackInsertKey(t, 0.15f, new Vector2(-42, -88));
+        anim.TrackInsertKey(t, 0.6f, new Vector2(-42, -72));
 
         t = anim.AddTrack(Animation.TrackType.Value);
         anim.TrackSetPath(t, "Visuals/Waist/RightArm:rotation");

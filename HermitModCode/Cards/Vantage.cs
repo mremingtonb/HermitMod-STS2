@@ -15,6 +15,8 @@ namespace HermitMod.Cards;
 /// </summary>
 public sealed class Vantage : HermitCard
 {
+    public override bool HasDeadOn => true;
+
     private const int BlockAmount = 7;
     private const int DrawUpgradeCount = 1;
     private const int UpgradedDrawUpgradeCount = 2;
@@ -31,8 +33,13 @@ public sealed class Vantage : HermitCard
         if (DeadOnHelper.IsDeadOn)
         {
             DeadOnHelper.IncrementDeadOnCount();
-            // Draw a card (upgrade functionality simplified)
-            await CardPileCmd.Draw(ctx, 1, Owner, false);
+            int count = IsUpgraded ? UpgradedDrawUpgradeCount : DrawUpgradeCount;
+            var drawn = await CardPileCmd.Draw(ctx, count, Owner, false);
+            foreach (var card in drawn)
+            {
+                if (card != null && card.IsUpgradable)
+                    CardCmd.Upgrade(card);
+            }
         }
     }
 

@@ -26,13 +26,12 @@ public sealed class RuggedPower : HermitPower
         if (target != Owner || Amount <= 0 || amount <= 0m)
             return amount;
 
-        // Consume a stack
-        Amount--;
+        // Consume a stack via SetAmount (Amount setter is private)
+        SetAmount(Amount - 1);
 
-        // If no stacks remain, mark for removal (will be cleaned up)
+        // If no stacks remain, schedule removal
         if (Amount <= 0)
         {
-            // Schedule removal — can't await in a non-async method, so use fire-and-forget
             _ = PowerCmd.Remove(this);
         }
 

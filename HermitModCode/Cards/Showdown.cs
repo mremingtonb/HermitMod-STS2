@@ -26,9 +26,9 @@ public sealed class Showdown : HermitCard
         await CreatureCmd.TriggerAnim(Owner.Creature, "Attack", Owner.Character.AttackAnimDelay);
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(play.Target).Execute(ctx);
 
-        // Auto-play all Strikes in hand
+        // Auto-play all Strikes in hand (match by type, not rarity — covers Hermit and base game Strikes)
         var strikes = PileType.Hand.GetPile(Owner).Cards
-            .Where(c => c.Rarity == CardRarity.Basic && c.Type == CardType.Attack)
+            .Where(c => c is Strike_Hermit || c.Id.Entry.Contains("STRIKE", StringComparison.OrdinalIgnoreCase))
             .ToList();
 
         foreach (var strike in strikes)

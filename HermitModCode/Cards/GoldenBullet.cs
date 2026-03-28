@@ -5,7 +5,6 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
-using MegaCrit.Sts2.Core.Entities.Cards;
 
 namespace HermitMod.Cards;
 
@@ -29,12 +28,12 @@ public sealed class GoldenBullet : HermitCard
         await CreatureCmd.TriggerAnim(Owner.Creature, "Attack", Owner.Character.AttackAnimDelay);
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(play.Target).Execute(ctx);
 
-        // Fatal: permanently reduce base cost by 1
+        // Fatal: permanently reduce base cost by 1 (persists because card instances
+        // are shared between combat piles and the deck)
         if (play.Target?.IsDead == true)
         {
-            int currentBase = EnergyCost.GetWithModifiers(CostModifiers.None);
-            int newCost = Math.Max(0, currentBase - 1);
-            EnergyCost.SetCustomBaseCost(newCost);
+            EnergyCost.UpgradeBy(-1);
+            EnergyCost.FinalizeUpgrade();
         }
     }
 

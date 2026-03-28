@@ -16,6 +16,8 @@ namespace HermitMod.Cards;
 /// </summary>
 public sealed class Deadeye : HermitCard
 {
+    public override bool HasDeadOn => true;
+
     private const int DamageAmount = 7;
     private const int UpgradedDamageAmount = 10;
     private const int StrengthAmt = 1;

@@ -11,6 +11,8 @@ namespace HermitMod.Cards;
 
 public class Roughhouse() : HermitCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
+    public override bool HasDeadOn => true;
+
     private const int Dmg = 7;
     private const int UpgradeDmg = 3;
     private const int Blk = 5;

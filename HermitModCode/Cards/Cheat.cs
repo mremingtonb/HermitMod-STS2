@@ -13,6 +13,8 @@ namespace HermitMod.Cards;
 /// </summary>
 public sealed class Cheat : HermitCard
 {
+    public override bool HasDeadOn => true;
+
     private const int CardCount = 3;
     private const int UpgradedCardCount = 5;
 

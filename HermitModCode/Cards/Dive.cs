@@ -16,6 +16,8 @@ namespace HermitMod.Cards;
 /// </summary>
 public sealed class Dive : HermitCard
 {
+    public override bool HasDeadOn => true;
+
     private const int BlockAmount = 10;
     private const int UpgradedBlockAmount = 14;
 

@@ -18,8 +18,8 @@ public static class DeadOnGlowPatch
         // If already glowing gold for another reason, don't interfere
         if (__result) return;
 
-        // Only glow Hermit cards (they have Dead On mechanics)
-        if (__instance is not HermitCard) return;
+        // Only glow Hermit cards that have Dead On mechanics
+        if (__instance is not HermitCard hermitCard || !hermitCard.HasDeadOn) return;
 
         // Check if the card is in the hand
         var pile = __instance.Pile;

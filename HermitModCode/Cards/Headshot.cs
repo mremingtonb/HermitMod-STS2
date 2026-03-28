@@ -11,6 +11,8 @@ namespace HermitMod.Cards;
 
 public class Headshot() : HermitCard(2, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
+    public override bool HasDeadOn => true;
+
     private const int Dmg = 12;
     private const int UpgradeDmg = 4;
 

@@ -17,6 +17,8 @@ namespace HermitMod.Cards;
 /// </summary>
 public sealed class GhostlyPresence : HermitCard
 {
+    public override bool HasDeadOn => true;
+
     private const int BlockAmount = 7;
     private const int UpgradedBlockAmount = 10;
     private const int WeakAmount = 1;

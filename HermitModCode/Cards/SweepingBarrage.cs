@@ -10,40 +10,37 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace HermitMod.Cards;
 
 /// <summary>
-/// Deal 8 damage. Dead On: Reduce the cost of a random card in your hand by 1 this turn.
+/// Deal 8 damage to ALL enemies. Dead On: Deal it again.
 /// Upgrade: 11 damage.
 /// </summary>
-public sealed class ItchyTrigger : HermitCard
+public sealed class SweepingBarrage : HermitCard
 {
     public override bool HasDeadOn => true;
 
     private const int DamageAmount = 8;
     private const int UpgradedDamageAmount = 11;
 
-    public ItchyTrigger() : base(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy) { }
+    public SweepingBarrage() : base(2, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies) { }
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar((decimal)DamageAmount, ValueProp.Move)];
 
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay play)
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Attack", Owner.Character.AttackAnimDelay);
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(play.Target).Execute(ctx);
+
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
+            .FromCard(this)
+            .TargetingAllOpponents(CombatState)
+            .Execute(ctx);
 
         if (DeadOnHelper.IsDeadOn)
         {
             DeadOnHelper.IncrementDeadOnCount();
-
-            // Reduce cost of a random card in hand by 1 this turn
-            var handCards = PileType.Hand.GetPile(Owner).Cards
-                .Where(c => !c.EnergyCost.CostsX && c != this)
-                .ToList();
-
-            if (handCards.Count > 0)
-            {
-                var rng = new Random();
-                var target = handCards[rng.Next(handCards.Count)];
-                target.EnergyCost.AddThisTurnOrUntilPlayed(-1, reduceOnly: true);
-            }
+            await CreatureCmd.TriggerAnim(Owner.Creature, "Attack", Owner.Character.AttackAnimDelay);
+            await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
+                .FromCard(this)
+                .TargetingAllOpponents(CombatState)
+                .Execute(ctx);
         }
     }
 

@@ -15,6 +15,8 @@ namespace HermitMod.Cards;
 /// </summary>
 public sealed class CalledShot : HermitCard
 {
+    public override bool HasDeadOn => true;
+
     private const int DamageAmount = 7;
     private const int DrawAmount = 1;
 

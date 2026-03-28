@@ -174,5 +174,9 @@
   "HERMITMOD-BUCKSHOT.title": "Buckshot",
   "HERMITMOD-BUCKSHOT.description": "Deal {Damage:diff()} damage to ALL enemies 2 times.",
   "HERMITMOD-FAN_THE_HAMMER.title": "Fan the Hammer",
-  "HERMITMOD-FAN_THE_HAMMER.description": "Deal {Damage:diff()} damage to a random enemy X+1 times."
+  "HERMITMOD-FAN_THE_HAMMER.description": "Deal {Damage:diff()} damage to a random enemy X+1 times.",
+  "HERMITMOD-MARKED_TARGET.title": "Marked Target",
+  "HERMITMOD-MARKED_TARGET.description": "Apply {VulnerablePower:diff()} [gold]Vulnerable[/gold].\n[gold]Dead On[/gold]: Also apply {VulnerablePower:diff()} [gold]Weak[/gold].",
+  "HERMITMOD-SWEEPING_BARRAGE.title": "Sweeping Barrage",
+  "HERMITMOD-SWEEPING_BARRAGE.description": "Deal {Damage:diff()} damage to ALL enemies.\n[gold]Dead On[/gold]: Deal {Damage:diff()} damage again."
 }

@@ -15,6 +15,8 @@ namespace HermitMod.Cards;
 /// </summary>
 public sealed class Snapshot : HermitCard
 {
+    public override bool HasDeadOn => true;
+
     private const int BlockAmount = 8;
     private const int UpgradedBlockAmount = 12;
 

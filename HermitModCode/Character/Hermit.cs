@@ -52,11 +52,36 @@ public class Hermit : PlaceholderCharacterModel
     public override string CustomCharacterSelectIconPath => "HermitButton.png".CharacterUiPath();
     public override string CustomCharacterSelectLockedIconPath => "HermitButton.png".CharacterUiPath();
 
-    // In-game UI icons
-    public override string CustomIconTexturePath => "HermitButton.png".CharacterUiPath();
+    // In-game UI icon (top-left corner, built programmatically)
+    public override Control? CustomIcon
+    {
+        get
+        {
+            var texture = ResourceLoader.Load<Texture2D>("res://HermitMod/images/charui/character_icon_hermit.png");
+            if (texture == null) return null;
+            var container = new Control();
+            container.SetAnchorsPreset(Control.LayoutPreset.FullRect);
+            var rect = new TextureRect();
+            rect.Texture = texture;
+            rect.ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize;
+            rect.StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered;
+            rect.SetAnchorsPreset(Control.LayoutPreset.FullRect);
+            rect.GrowHorizontal = Control.GrowDirection.Both;
+            rect.GrowVertical = Control.GrowDirection.Both;
+            container.AddChild(rect);
+            return container;
+        }
+    }
+    public override string CustomIconTexturePath => "character_icon_hermit.png".CharacterUiPath();
 
     // Map marker
-    public override string CustomMapMarkerPath => "HermitButton.png".CharacterUiPath();
+    public override string CustomMapMarkerPath => "map_marker_hermit.png".CharacterUiPath();
+
+    // Multiplayer arm textures (relic selection / rock-paper-scissors)
+    public override string? CustomArmPointingTexturePath => "hermit_arm_point.png".CharacterUiPath();
+    public override string? CustomArmRockTexturePath => "hermit_arm_point.png".CharacterUiPath();
+    public override string? CustomArmPaperTexturePath => "hermit_arm_point.png".CharacterUiPath();
+    public override string? CustomArmScissorsTexturePath => "hermit_arm_point.png".CharacterUiPath();
 
     // Sound effects — use crossbow sound as gun placeholder
     public override string CharacterTransitionSfx => "event:/sfx/ui/wipe_ironclad";

@@ -11,10 +11,10 @@ public class HermitCardPool : CustomCardPoolModel
     public override string BigEnergyIconPath => "charui/big_energy.png".ImagePath();
     public override string TextEnergyIconPath => "charui/text_energy.png".ImagePath();
 
-    // Warm brown/gold card frame (matching original Hermit)
+    // Warm brown/gold card frame (matching original Hermit STS1 backgrounds)
     public override float H => 0.088f;
-    public override float S => 0.57f;
-    public override float V => 0.70f;
+    public override float S => 0.48f;
+    public override float V => 0.47f;
 
     public override Color DeckEntryCardColor => new("B1814C");
 

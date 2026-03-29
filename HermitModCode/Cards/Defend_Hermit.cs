@@ -13,6 +13,7 @@ public class Defend_Hermit() : HermitCard(1, CardType.Skill, CardRarity.Basic, T
     private const int Block = 5;
     private const int UpgradeBlock = 3;
 
+    protected override HashSet<CardTag> CanonicalTags => new() { CardTag.Defend };
     protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar((decimal)Block, ValueProp.Move)];
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay play)
     {

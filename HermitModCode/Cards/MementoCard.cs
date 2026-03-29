@@ -12,11 +12,15 @@ using MegaCrit.Sts2.Core.Models.Powers;
 namespace HermitMod.Cards;
 
 /// <summary>
-/// Apply 1 Vulnerable to ALL enemies. Retain.
+/// Apply 1 Vulnerable to EVERYONE (all enemies AND player). Retain.
+/// Upgrade: Apply 2 Vulnerable.
 /// </summary>
 [Pool(typeof(HermitCardPool))]
 public sealed class MementoCard : CustomCardModel
 {
+    private const int VulnAmount = 1;
+    private const int UpgradedVulnAmount = 2;
+
     public MementoCard() : base(0, CardType.Skill, CardRarity.Common, TargetType.AllEnemies) { }
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
 
@@ -24,16 +28,25 @@ public sealed class MementoCard : CustomCardModel
     public override string PortraitPath => "memento_card.png".CardImagePath();
     public override string BetaPortraitPath => "beta/memento_card.png".CardImagePath();
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<VulnerablePower>(1m)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<VulnerablePower>((decimal)VulnAmount)];
 
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay play)
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
+        int amount = IsUpgraded ? UpgradedVulnAmount : VulnAmount;
+
+        // Apply to ALL enemies
         foreach (var enemy in CombatState.HittableEnemies)
         {
-            await PowerCmd.Apply<VulnerablePower>(enemy, DynamicVars["VulnerablePower"].BaseValue, Owner.Creature, this);
+            await PowerCmd.Apply<VulnerablePower>(enemy, amount, Owner.Creature, this);
         }
+
+        // Apply to player too (EVERYONE)
+        await PowerCmd.Apply<VulnerablePower>(Owner.Creature, amount, Owner.Creature, this);
     }
 
-    protected override void OnUpgrade() { }
+    protected override void OnUpgrade()
+    {
+        DynamicVars["VulnerablePower"].UpgradeValueBy(UpgradedVulnAmount - VulnAmount);
+    }
 }

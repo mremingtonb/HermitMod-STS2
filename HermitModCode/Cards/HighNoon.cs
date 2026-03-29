@@ -7,6 +7,10 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace HermitMod.Cards;
 
+/// <summary>
+/// Whenever you play a Strike or Defend, draw a card.
+/// Upgrade: Cost reduced from 2 to 1.
+/// </summary>
 public sealed class HighNoon : HermitCard
 {
     public HighNoon() : base(2, CardType.Power, CardRarity.Rare, TargetType.None) { }
@@ -17,5 +21,9 @@ public sealed class HighNoon : HermitCard
         await PowerCmd.Apply<HighNoonPower>(Owner.Creature, 1, Owner.Creature, this);
     }
 
-    protected override void OnUpgrade() { }
+    protected override void OnUpgrade()
+    {
+        EnergyCost.UpgradeBy(-1);
+        EnergyCost.FinalizeUpgrade();
+    }
 }

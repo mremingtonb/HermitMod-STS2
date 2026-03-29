@@ -26,12 +26,27 @@ public sealed class Spite : HermitCard
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay play)
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
+
+        // Exhaust all Unplayable cards in hand
+        var handPile = PileType.Hand.GetPile(Owner);
+        if (handPile != null)
+        {
+            var unplayable = handPile.Cards
+                .Where(c => c.Keywords.Contains(CardKeyword.Unplayable))
+                .ToList();
+            foreach (var card in unplayable)
+            {
+                await CardPileCmd.Add(card, PileType.Exhaust);
+            }
+        }
+
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
-        await CardPileCmd.Draw(ctx, DrawAmount, Owner, false);
+        await CardPileCmd.Draw(ctx, DynamicVars.Cards.IntValue, Owner, false);
     }
 
     protected override void OnUpgrade()
     {
         DynamicVars.Block.UpgradeValueBy(UpgradedBlockAmount - BlockAmount);
+        DynamicVars.Cards.UpgradeValueBy(UpgradedDrawAmount - DrawAmount);
     }
 }

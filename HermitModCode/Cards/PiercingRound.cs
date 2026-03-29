@@ -24,10 +24,9 @@ public sealed class PiercingRound : HermitCard
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay play)
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Attack", Owner.Character.AttackAnimDelay);
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
-            .Targeting(play.Target)
-            .Execute(ctx);
+        // Use CreatureCmd.Damage with Unblockable flag since DamageCmd.Attack doesn't support it
+        await CreatureCmd.Damage(ctx, play.Target, DynamicVars.Damage.BaseValue,
+            ValueProp.Move | ValueProp.Unblockable, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

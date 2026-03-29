@@ -1,3 +1,4 @@
+using HermitMod.Character;
 using HermitMod.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -13,6 +14,8 @@ namespace HermitMod.Cards;
 public sealed class TakeAim : HermitCard
 {
     public TakeAim() : base(1, CardType.Power, CardRarity.Uncommon, TargetType.Self) { }
+
+    protected override IEnumerable<CardKeyword> CustomKeywords => [HermitKeywords.Concentrate];
 
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay play)
     {

@@ -1,4 +1,5 @@
 using HermitMod.Cards;
+using HermitMod.Character;
 using HermitMod.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -21,6 +22,8 @@ public sealed class Horror : HermitCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<BruisePower>((decimal)BruiseAmount)];
 
+    protected override IEnumerable<CardKeyword> CustomKeywords => [HermitKeywords.Bruise];
+
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay play)
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
@@ -28,6 +31,8 @@ public sealed class Horror : HermitCard
         foreach (var enemy in CombatState.HittableEnemies)
         {
             await PowerCmd.Apply<BruisePower>(enemy, amount, Owner.Creature, this);
+            // Apply Horror to each enemy so their Bruise doesn't wear off this turn
+            await PowerCmd.Apply<HorrorPower>(enemy, 1, Owner.Creature, this);
         }
     }
 

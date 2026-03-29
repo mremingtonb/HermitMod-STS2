@@ -38,6 +38,10 @@ public sealed class BruisePower : HermitPower
     {
         if (side == Owner.Side)
         {
+            // If Horror is active on this creature, Bruise doesn't wear off
+            if (Owner.HasPower<HorrorPower>())
+                return;
+
             await PowerCmd.Remove(this);
         }
     }

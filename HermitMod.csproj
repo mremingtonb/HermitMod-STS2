@@ -22,7 +22,7 @@
     <!-- Windows -->
     <PropertyGroup Condition="'$(IsWindows)' == 'true'">
         <GodotPath Condition="'$(GodotPath)' == ''">C:/Godot/Godot_v4.5.1-stable_mono_win64.exe</GodotPath>
-        <SteamLibraryPath Condition="'$(SteamLibraryPath)' == ''">G:/SteamLibrary/steamapps</SteamLibraryPath>
+        <SteamLibraryPath Condition="'$(SteamLibraryPath)' == ''">C:/Program Files (x86)/Steam/steamapps</SteamLibraryPath>
 
         <Sts2Path>$(SteamLibraryPath)/common/Slay the Spire 2</Sts2Path>
         <ModsPath>$(Sts2Path)/mods/</ModsPath>

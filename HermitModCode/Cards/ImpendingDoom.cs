@@ -15,7 +15,7 @@ namespace HermitMod.Cards;
 [Pool(typeof(HermitCardPool))]
 public sealed class ImpendingDoom : CustomCardModel
 {
-    public ImpendingDoom() : base(-2, CardType.Status, CardRarity.Rare, TargetType.None) { }
+    public ImpendingDoom() : base(-2, CardType.Status, CardRarity.Basic, TargetType.None) { }
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Unplayable];
 

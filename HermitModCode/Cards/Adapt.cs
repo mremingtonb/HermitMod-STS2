@@ -17,5 +17,8 @@ public sealed class Adapt : HermitCard
         await PowerCmd.Apply<AdaptPower>(Owner.Creature, 1, Owner.Creature, this);
     }
 
-    protected override void OnUpgrade() { }
+    protected override void OnUpgrade()
+    {
+        EnergyCost.UpgradeBy(-1);
+    }
 }

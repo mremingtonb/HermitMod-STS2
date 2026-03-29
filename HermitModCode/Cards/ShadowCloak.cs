@@ -20,5 +20,8 @@ public sealed class ShadowCloak : HermitCard
         await PowerCmd.Apply<ShadowCloakPower>(Owner.Creature, 1, Owner.Creature, this);
     }
 
-    protected override void OnUpgrade() { }
+    protected override void OnUpgrade()
+    {
+        EnergyCost.UpgradeBy(-1);
+    }
 }

@@ -15,18 +15,25 @@ namespace HermitMod.Cards;
 /// </summary>
 public sealed class Maintenance : HermitCard
 {
+    private const int StrikeDmg = 3;
+    private const int UpgradedStrikeDmg = 4;
     private const int DexAmount = 1;
     private const int UpgradedDexAmount = 2;
 
     public Maintenance() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.None) { }
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<DexterityPower>((decimal)DexAmount)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new PowerVar<MaintenanceStrikePower>((decimal)StrikeDmg),
+        new PowerVar<DexterityPower>((decimal)DexAmount)
+    ];
 
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay play)
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
-        int amount = IsUpgraded ? UpgradedDexAmount : DexAmount;
-        await PowerCmd.Apply<DexterityPower>(Owner.Creature, amount, Owner.Creature, this);
+        int strikeDmg = IsUpgraded ? UpgradedStrikeDmg : StrikeDmg;
+        int dex = IsUpgraded ? UpgradedDexAmount : DexAmount;
+        await PowerCmd.Apply<MaintenanceStrikePower>(Owner.Creature, strikeDmg, Owner.Creature, this);
+        await PowerCmd.Apply<DexterityPower>(Owner.Creature, dex, Owner.Creature, this);
 
         // This card costs 1 more each time it's played this combat
         EnergyCost.UpgradeBy(1);
@@ -35,6 +42,7 @@ public sealed class Maintenance : HermitCard
 
     protected override void OnUpgrade()
     {
+        DynamicVars["MaintenanceStrikePower"].UpgradeValueBy(UpgradedStrikeDmg - StrikeDmg);
         DynamicVars["DexterityPower"].UpgradeValueBy(UpgradedDexAmount - DexAmount);
     }
 }

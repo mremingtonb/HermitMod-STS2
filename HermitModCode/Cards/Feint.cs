@@ -1,4 +1,5 @@
 using HermitMod.Cards;
+using HermitMod.Character;
 using HermitMod.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -17,6 +18,8 @@ public class Feint() : HermitCard(1, CardType.Skill, CardRarity.Common, TargetTy
     private const int UpgradedBruiseAmt = 3;
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar((decimal)Blk, ValueProp.Move), new PowerVar<BruisePower>((decimal)BruiseAmt)];
+
+    protected override IEnumerable<CardKeyword> CustomKeywords => [HermitKeywords.Bruise];
 
     private int CurrentBruise => IsUpgraded ? UpgradedBruiseAmt : BruiseAmt;
 

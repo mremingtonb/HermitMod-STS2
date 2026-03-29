@@ -17,5 +17,8 @@ public sealed class Combo : HermitCard
         await PowerCmd.Apply<ComboPower>(Owner.Creature, 1, Owner.Creature, this);
     }
 
-    protected override void OnUpgrade() { }
+    protected override void OnUpgrade()
+    {
+        EnergyCost.UpgradeBy(-1);
+    }
 }

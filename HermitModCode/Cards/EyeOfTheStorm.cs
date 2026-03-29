@@ -1,4 +1,5 @@
 using HermitMod.Cards;
+using HermitMod.Character;
 using HermitMod.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -17,6 +18,8 @@ public sealed class EyeOfTheStorm : HermitCard
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
+    protected override IEnumerable<CardKeyword> CustomKeywords => [HermitKeywords.Concentrate];
+
     protected override IEnumerable<DynamicVar> CanonicalVars => [new EnergyVar(3)];
 
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay play)
@@ -26,5 +29,8 @@ public sealed class EyeOfTheStorm : HermitCard
         await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue, Owner);
     }
 
-    protected override void OnUpgrade() { }
+    protected override void OnUpgrade()
+    {
+        DynamicVars.Energy.UpgradeValueBy(1);
+    }
 }

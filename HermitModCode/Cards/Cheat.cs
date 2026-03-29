@@ -30,5 +30,8 @@ public sealed class Cheat : HermitCard
         await CardPileCmd.Draw(ctx, 1, Owner, false);
     }
 
-    protected override void OnUpgrade() { }
+    protected override void OnUpgrade()
+    {
+        DynamicVars.Cards.UpgradeValueBy(UpgradedCardCount - CardCount);
+    }
 }

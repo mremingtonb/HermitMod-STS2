@@ -17,5 +17,8 @@ public sealed class Determination : HermitCard
         await PowerCmd.Apply<DeterminationPower>(Owner.Creature, 1, Owner.Creature, this);
     }
 
-    protected override void OnUpgrade() { }
+    protected override void OnUpgrade()
+    {
+        EnergyCost.UpgradeBy(-1);
+    }
 }

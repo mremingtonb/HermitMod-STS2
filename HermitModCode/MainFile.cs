@@ -1,3 +1,5 @@
+using System;
+using System.Reflection;
 using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Modding;
@@ -14,7 +16,25 @@ public partial class MainFile : Node
     public static void Initialize()
     {
         Harmony harmony = new(ModId);
-        harmony.PatchAll();
+
+        // Patch each type individually so one failure doesn't block everything
+        var assembly = Assembly.GetExecutingAssembly();
+        foreach (var type in assembly.GetTypes())
+        {
+            try
+            {
+                var patchInfo = HarmonyMethodExtensions.GetFromType(type);
+                if (patchInfo != null && patchInfo.Count > 0)
+                {
+                    harmony.CreateClassProcessor(type).Patch();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Info($"Skipping patch {type.Name}: {ex.Message}");
+            }
+        }
+
         Logger.Info("The Hermit mod loaded successfully!");
     }
 }

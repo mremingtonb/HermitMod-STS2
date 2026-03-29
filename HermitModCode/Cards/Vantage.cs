@@ -43,5 +43,8 @@ public sealed class Vantage : HermitCard
         }
     }
 
-    protected override void OnUpgrade() { }
+    protected override void OnUpgrade()
+    {
+        DynamicVars.Cards.UpgradeValueBy(UpgradedDrawUpgradeCount - DrawUpgradeCount);
+    }
 }

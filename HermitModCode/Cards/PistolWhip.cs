@@ -1,4 +1,5 @@
 using HermitMod.Cards;
+using HermitMod.Character;
 using HermitMod.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -17,6 +18,8 @@ public class PistolWhip() : HermitCard(1, CardType.Attack, CardRarity.Common, Ta
     private const int UpgradedBruiseAmt = 3;
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar((decimal)Dmg, ValueProp.Move), new PowerVar<BruisePower>((decimal)BruiseAmt)];
+
+    protected override IEnumerable<CardKeyword> CustomKeywords => [HermitKeywords.Bruise];
 
     private int CurrentBruise => IsUpgraded ? UpgradedBruiseAmt : BruiseAmt;
 

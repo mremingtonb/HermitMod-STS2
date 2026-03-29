@@ -1,4 +1,5 @@
 using HermitMod.Cards;
+using HermitMod.Character;
 using HermitMod.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -21,6 +22,8 @@ public sealed class HeroicBravado : HermitCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<RuggedPower>((decimal)RuggedAmt)];
 
+    protected override IEnumerable<CardKeyword> CustomKeywords => [HermitKeywords.Rugged];
+
     private int CurrentRugged => IsUpgraded ? UpgradedRuggedAmt : RuggedAmt;
 
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay play)
@@ -32,5 +35,8 @@ public sealed class HeroicBravado : HermitCard
         EnergyCost.SetCustomBaseCost(EnergyCost.GetWithModifiers(default) + 1);
     }
 
-    protected override void OnUpgrade() { }
+    protected override void OnUpgrade()
+    {
+        DynamicVars["RuggedPower"].UpgradeValueBy(UpgradedRuggedAmt - RuggedAmt);
+    }
 }

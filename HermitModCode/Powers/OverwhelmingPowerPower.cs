@@ -19,6 +19,10 @@ public sealed class OverwhelmingPowerPower : HermitPower
     {
         if (side != CombatSide.Player) return;
 
+        // Only lose HP if ending turn with 0 energy
+        var player = Owner.Player;
+        if (player?.PlayerCombatState?.Energy != 0) return;
+
         Flash();
         await CreatureCmd.Damage(choiceContext, Owner, Amount,
             ValueProp.Unblockable | ValueProp.Unpowered, Owner, null);

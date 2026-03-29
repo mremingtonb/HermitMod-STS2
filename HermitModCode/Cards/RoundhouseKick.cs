@@ -1,4 +1,5 @@
 using HermitMod.Cards;
+using HermitMod.Character;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -22,6 +23,8 @@ public sealed class RoundhouseKick : HermitCard
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar((decimal)DamageAmount, ValueProp.Move)];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+
+    protected override IEnumerable<CardKeyword> CustomKeywords => [HermitKeywords.Stun];
 
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay play)
     {

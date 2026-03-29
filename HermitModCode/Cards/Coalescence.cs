@@ -22,19 +22,24 @@ public sealed class Coalescence : HermitCard
 
     public Coalescence() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.None) { }
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar((decimal)BlockAmount, ValueProp.Move)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new BlockVar((decimal)BlockAmount, ValueProp.Move),
+        new PowerVar<CoalescencePower>((decimal)RetainCount)
+    ];
+
+    private int CurrentRetainCount => IsUpgraded ? UpgradedRetainCount : RetainCount;
 
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay play)
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
 
-        // Upgrade handling simplified - base values used
-        await PowerCmd.Apply<CoalescencePower>(Owner.Creature, 1, Owner.Creature, this);
+        await PowerCmd.Apply<CoalescencePower>(Owner.Creature, CurrentRetainCount, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
         DynamicVars.Block.UpgradeValueBy(UpgradedBlockAmount - BlockAmount);
+        DynamicVars["CoalescencePower"].UpgradeValueBy(UpgradedRetainCount - RetainCount);
     }
 }

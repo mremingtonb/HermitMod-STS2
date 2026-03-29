@@ -21,7 +21,7 @@ public sealed class MementoCard : CustomCardModel
     private const int VulnAmount = 1;
     private const int UpgradedVulnAmount = 2;
 
-    public MementoCard() : base(0, CardType.Skill, CardRarity.Common, TargetType.AllEnemies) { }
+    public MementoCard() : base(0, CardType.Skill, CardRarity.Basic, TargetType.AllEnemies) { }
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
 
     public override string CustomPortraitPath => "memento_card.png".BigCardImagePath();

@@ -20,7 +20,7 @@ public sealed class Snapshot : HermitCard
     private const int DamageAmount = 6;
     private const int UpgradedDamageAmount = 9;
 
-    public Snapshot() : base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy) { }
+    public Snapshot() : base(1, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy) { }
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar((decimal)DamageAmount, ValueProp.Move)];
 

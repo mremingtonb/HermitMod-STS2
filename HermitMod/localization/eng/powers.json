@@ -39,6 +39,7 @@
   "HERMITMOD-SNIPE_POWER.description": "The next {Amount} [gold]Dead On[/gold] effect(s) this turn trigger twice.",
   "HERMITMOD-COALESCENCE_POWER.title": "Coalescence",
   "HERMITMOD-COALESCENCE_POWER.description": "At the end of your turn, [gold]Retain[/gold] up to {Amount} card(s).",
+  "HERMITMOD-COALESCENCE_POWER.selectionScreenPrompt": "Choose cards to Retain.",
   "HERMITMOD-REPRIEVE_POWER.title": "Reprieve",
   "HERMITMOD-REPRIEVE_POWER.description": "Take {Amount} extra turn(s) after this one.",
   "HERMITMOD-PET_GHOST_POWER.title": "Pet Ghost",

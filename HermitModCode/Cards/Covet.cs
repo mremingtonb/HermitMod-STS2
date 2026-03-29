@@ -17,7 +17,7 @@ public sealed class Covet : HermitCard
     private const int DrawAmt = 1;
     private const int UpgradeDrawAmt = 1;
 
-    public Covet() : base(0, CardType.Skill, CardRarity.Common, TargetType.None) { }
+    public Covet() : base(0, CardType.Skill, CardRarity.Basic, TargetType.None) { }
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(DrawAmt)];
 

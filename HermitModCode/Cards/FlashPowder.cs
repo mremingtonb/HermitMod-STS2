@@ -27,15 +27,16 @@ public sealed class FlashPowder : HermitCard
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
+    private int CurrentStrengthLoss => IsUpgraded ? UpgradedStrengthLoss : StrengthLoss;
+
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay play)
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
 
-        // Upgrade handling simplified - base values used
         foreach (Creature enemy in CombatState.HittableEnemies)
         {
-            await PowerCmd.Apply<StrengthPower>(enemy, -1, Owner.Creature, this);
+            await PowerCmd.Apply<StrengthPower>(enemy, -CurrentStrengthLoss, Owner.Creature, this);
         }
     }
 

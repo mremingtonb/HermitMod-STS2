@@ -93,24 +93,24 @@ public static class HermitVisualBuilder
         body.Owner = root;
 
         // Right arm (behind body, mostly hidden)
-        var rightArm = CreateSprite("RightArm", CharDir + "right_hand.png", new Vector2(40, -50));
+        var rightArm = CreateSprite("RightArm", CharDir + "right_hand.png", new Vector2(38, -82));
         rightArm.Rotation = 0.264f;
         waist.AddChild(rightArm);
         rightArm.Owner = root;
 
-        // Left arm (pivot for gun — raised near face level)
+        // Left arm (pivot for gun — positioned at left shoulder socket)
         var leftArm = new Node2D();
         leftArm.Name = "LeftArm";
-        leftArm.Position = new Vector2(-42, -72);
+        leftArm.Position = new Vector2(-30, -88);
         leftArm.Rotation = -0.15f;
         waist.AddChild(leftArm);
         leftArm.Owner = root;
 
-        var handGun = CreateSprite("HandGun", CharDir + "hand_gun.png", new Vector2(0, -5));
+        var handGun = CreateSprite("HandGun", CharDir + "hand_gun.png", new Vector2(-5, 5));
         leftArm.AddChild(handGun);
         handGun.Owner = root;
 
-        var gun = CreateSprite("Gun", CharDir + "gun.png", new Vector2(-18, -28));
+        var gun = CreateSprite("Gun", CharDir + "gun.png", new Vector2(-12, -12));
         gun.Rotation = 0.3f;
         gun.Scale = new Vector2(0.85f, 0.85f);
         leftArm.AddChild(gun);
@@ -219,9 +219,9 @@ public static class HermitVisualBuilder
         t = anim.AddTrack(Animation.TrackType.Value);
         anim.TrackSetPath(t, "Visuals/Waist/LeftArm:position");
         anim.TrackSetInterpolationType(t, Animation.InterpolationType.Cubic);
-        anim.TrackInsertKey(t, 0f, new Vector2(-42, -72));
-        anim.TrackInsertKey(t, 0.8333f, new Vector2(-46, -78));
-        anim.TrackInsertKey(t, 1.6666f, new Vector2(-42, -72));
+        anim.TrackInsertKey(t, 0f, new Vector2(-30, -88));
+        anim.TrackInsertKey(t, 0.8333f, new Vector2(-34, -94));
+        anim.TrackInsertKey(t, 1.6666f, new Vector2(-30, -88));
 
         // Left arm rotation
         t = anim.AddTrack(Animation.TrackType.Value);
@@ -368,9 +368,9 @@ public static class HermitVisualBuilder
         t = anim.AddTrack(Animation.TrackType.Value);
         anim.TrackSetPath(t, "Visuals/Waist/LeftArm:position");
         anim.TrackSetInterpolationType(t, Animation.InterpolationType.Cubic);
-        anim.TrackInsertKey(t, 0f, new Vector2(-42, -72));
-        anim.TrackInsertKey(t, 0.15f, new Vector2(-42, -88));
-        anim.TrackInsertKey(t, 0.6f, new Vector2(-42, -72));
+        anim.TrackInsertKey(t, 0f, new Vector2(-30, -88));
+        anim.TrackInsertKey(t, 0.15f, new Vector2(-30, -104));
+        anim.TrackInsertKey(t, 0.6f, new Vector2(-30, -88));
 
         t = anim.AddTrack(Animation.TrackType.Value);
         anim.TrackSetPath(t, "Visuals/Waist/RightArm:rotation");

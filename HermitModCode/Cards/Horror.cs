@@ -8,17 +8,31 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace HermitMod.Cards;
 
+/// <summary>
+/// Apply 3 Bruise to ALL enemies. Bruise does not wear off this turn.
+/// Upgrade: Apply 4 Bruise.
+/// </summary>
 public sealed class Horror : HermitCard
 {
-    public Horror() : base(1, CardType.Skill, CardRarity.Common, TargetType.AnyEnemy) { }
+    private const int BruiseAmount = 3;
+    private const int UpgradedBruiseAmount = 4;
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<BruisePower>(3m)];
+    public Horror() : base(1, CardType.Skill, CardRarity.Common, TargetType.AllEnemies) { }
+
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<BruisePower>((decimal)BruiseAmount)];
 
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay play)
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<BruisePower>(play.Target, 3, Owner.Creature, this);
+        int amount = IsUpgraded ? UpgradedBruiseAmount : BruiseAmount;
+        foreach (var enemy in CombatState.HittableEnemies)
+        {
+            await PowerCmd.Apply<BruisePower>(enemy, amount, Owner.Creature, this);
+        }
     }
 
-    protected override void OnUpgrade() { }
+    protected override void OnUpgrade()
+    {
+        DynamicVars["BruisePower"].UpgradeValueBy(UpgradedBruiseAmount - BruiseAmount);
+    }
 }

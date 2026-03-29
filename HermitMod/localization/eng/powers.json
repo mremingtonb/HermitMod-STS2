@@ -75,5 +75,9 @@
 
   "HERMITMOD-SPRAY_PATTERN_POWER.title": "Spray Pattern",
   "HERMITMOD-SPRAY_PATTERN_POWER.description": "At the start of your turn, deal {SprayPatternPower:diff()} damage to ALL enemies.",
-  "HERMITMOD-SPRAY_PATTERN_POWER.smartDescription": "At the start of your turn, deal {SprayPatternPower:diff()} damage to ALL enemies."
+  "HERMITMOD-SPRAY_PATTERN_POWER.smartDescription": "At the start of your turn, deal {SprayPatternPower:diff()} damage to ALL enemies.",
+
+  "HERMITMOD-SCOPE_IN_STRENGTH_POWER.title": "Scope In",
+  "HERMITMOD-SCOPE_IN_STRENGTH_POWER.description": "Lose {ScopeInStrengthPower:diff()} Strength at end of turn.",
+  "HERMITMOD-SCOPE_IN_STRENGTH_POWER.smartDescription": "Lose {ScopeInStrengthPower:diff()} Strength at end of turn."
 }

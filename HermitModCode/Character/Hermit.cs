@@ -28,11 +28,11 @@ public class Hermit : PlaceholderCharacterModel
         ModelDb.Card<Strike_Hermit>(),
         ModelDb.Card<Strike_Hermit>(),
         ModelDb.Card<Strike_Hermit>(),
-        ModelDb.Card<Strike_Hermit>(),
         ModelDb.Card<Defend_Hermit>(),
         ModelDb.Card<Defend_Hermit>(),
         ModelDb.Card<Defend_Hermit>(),
         ModelDb.Card<Defend_Hermit>(),
+        ModelDb.Card<Covet>(),
         ModelDb.Card<Snapshot>()
     ];
 

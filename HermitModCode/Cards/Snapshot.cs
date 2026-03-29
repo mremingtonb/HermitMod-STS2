@@ -10,34 +10,47 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace HermitMod.Cards;
 
 /// <summary>
-/// Gain 8 Block. Dead On: Draw 1 card.
-/// Upgrade: 12 Block.
+/// Deal 6 damage. Dead On: Gain Block equal to unblocked damage dealt.
+/// Upgrade: 9 damage.
 /// </summary>
 public sealed class Snapshot : HermitCard
 {
     public override bool HasDeadOn => true;
 
-    private const int BlockAmount = 8;
-    private const int UpgradedBlockAmount = 12;
+    private const int DamageAmount = 6;
+    private const int UpgradedDamageAmount = 9;
 
-    public Snapshot() : base(1, CardType.Skill, CardRarity.Common, TargetType.None) { }
+    public Snapshot() : base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy) { }
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar((decimal)BlockAmount, ValueProp.Move)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar((decimal)DamageAmount, ValueProp.Move)];
 
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay play)
     {
-        await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
-        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
+        await CreatureCmd.TriggerAnim(Owner.Creature, "Attack", Owner.Character.AttackAnimDelay);
 
-        if (DeadOnHelper.IsDeadOn)
+        // Record target HP before attack to calculate unblocked damage
+        int hpBefore = play.Target?.CurrentHp ?? 0;
+
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
+            .FromCard(this)
+            .Targeting(play.Target)
+            .Execute(ctx);
+
+        if (DeadOnHelper.IsDeadOn && play.Target != null)
         {
             DeadOnHelper.IncrementDeadOnCount();
-            await CardPileCmd.Draw(ctx, 1, Owner, false);
+            // Calculate unblocked damage: how much HP the target actually lost
+            int hpAfter = play.Target.IsDead ? 0 : play.Target.CurrentHp;
+            int unblockedDamage = hpBefore - hpAfter;
+            if (unblockedDamage > 0)
+            {
+                await CreatureCmd.GainBlock(Owner.Creature, (decimal)unblockedDamage, ValueProp.Move, play);
+            }
         }
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(UpgradedBlockAmount - BlockAmount);
+        DynamicVars.Damage.UpgradeValueBy(UpgradedDamageAmount - DamageAmount);
     }
 }

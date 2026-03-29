@@ -13,6 +13,7 @@ public class Strike_Hermit() : HermitCard(1, CardType.Attack, CardRarity.Basic, 
     private const int Damage = 6;
     private const int UpgradeDamage = 3;
 
+    protected override HashSet<CardTag> CanonicalTags => new() { CardTag.Strike };
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar((decimal)Damage, ValueProp.Move)];
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay play)
     {

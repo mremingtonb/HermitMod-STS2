@@ -9,7 +9,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace HermitMod.Cards;
 
 /// <summary>
-/// Deal 15 damage to ALL enemies. Exhaust.
+/// Deal 15 damage to ALL enemies. Stun any that don't intend to attack. Exhaust.
 /// Upgrade: 20 damage.
 /// </summary>
 public sealed class RoundhouseKick : HermitCard
@@ -30,6 +30,20 @@ public sealed class RoundhouseKick : HermitCard
             .FromCard(this)
             .TargetingAllOpponents(CombatState)
             .Execute(ctx);
+
+        // Stun enemies that don't intend to attack
+        foreach (var enemy in CombatState.HittableEnemies)
+        {
+            if (enemy.IsDead) continue;
+            var monster = enemy.Monster;
+            if (monster == null) continue;
+
+            // Check if the monster does NOT intend to attack
+            if (!monster.IntendsToAttack)
+            {
+                enemy.StunInternal(async (_) => { }, null);
+            }
+        }
     }
 
     protected override void OnUpgrade()

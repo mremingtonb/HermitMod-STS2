@@ -17,6 +17,7 @@ public sealed class Reprieve : HermitCard
     private const int BlockAmount = 8;
     private const int UpgradedBlockAmount = 12;
     private const int HealAmount = 3;
+    private const int UpgradedHealAmount = 5;
 
     public Reprieve() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.None) { }
 
@@ -37,5 +38,6 @@ public sealed class Reprieve : HermitCard
     protected override void OnUpgrade()
     {
         DynamicVars.Block.UpgradeValueBy(UpgradedBlockAmount - BlockAmount);
+        DynamicVars.Heal.UpgradeValueBy(UpgradedHealAmount - HealAmount);
     }
 }

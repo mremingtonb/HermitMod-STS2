@@ -9,33 +9,27 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace HermitMod.Cards;
 
 /// <summary>
-/// Deal 6 damage to ALL enemies 2 times. Exhaust.
-/// Upgrade: 9 damage.
+/// Ethereal. Deal damage equal to your missing HP. Exhaust.
+/// Upgrade: Remove Ethereal.
 /// </summary>
 public sealed class BlackWind : HermitCard
 {
-    private const int DamageAmount = 6;
-    private const int UpgradedDamageAmount = 9;
-    private const int HitCount = 2;
+    public BlackWind() : base(2, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy) { }
 
-    public BlackWind() : base(2, CardType.Attack, CardRarity.Rare, TargetType.AllEnemies) { }
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(0m, ValueProp.Move)];
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar((decimal)DamageAmount, ValueProp.Move)];
-
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+    public override IEnumerable<CardKeyword> CanonicalKeywords =>
+        IsUpgraded ? [CardKeyword.Exhaust] : [CardKeyword.Exhaust, CardKeyword.Ethereal];
 
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay play)
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Attack", Owner.Character.AttackAnimDelay);
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
+        int missingHp = Owner.Creature.MaxHp - Owner.Creature.CurrentHp;
+        await DamageCmd.Attack(missingHp)
             .FromCard(this)
-            .TargetingAllOpponents(CombatState)
-            .WithHitCount(HitCount)
+            .Targeting(play.Target)
             .Execute(ctx);
     }
 
-    protected override void OnUpgrade()
-    {
-        DynamicVars.Damage.UpgradeValueBy(UpgradedDamageAmount - DamageAmount);
-    }
+    protected override void OnUpgrade() { }
 }

@@ -18,13 +18,17 @@ public sealed class SniperFocusPower : HermitPower
     {
         // Only boost single-target attacks from the owner
         if (dealer != Owner || cardSource == null)
-            return amount;
+            return 0m;
+
+        // Only boost powered attacks (not HP loss etc.)
+        if (!props.HasFlag(ValueProp.Move))
+            return 0m;
 
         // Only boost single-target cards
         if (cardSource.TargetType != TargetType.AnyEnemy)
-            return amount;
+            return 0m;
 
         // Add 3 damage per stack
-        return amount + (3m * Amount);
+        return 3m * Amount;
     }
 }

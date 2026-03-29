@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace HermitMod.Cards;
@@ -32,8 +33,11 @@ public sealed class GoldenBullet : HermitCard
         // are shared between combat piles and the deck)
         if (play.Target?.IsDead == true)
         {
-            EnergyCost.UpgradeBy(-1);
-            EnergyCost.FinalizeUpgrade();
+            int currentCost = EnergyCost.GetWithModifiers(CostModifiers.None);
+            if (currentCost > 0)
+            {
+                EnergyCost.SetCustomBaseCost(currentCost - 1);
+            }
         }
     }
 

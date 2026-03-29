@@ -1,4 +1,5 @@
 using HermitMod.Cards;
+using HermitMod.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -29,10 +30,13 @@ public sealed class ScopeIn : HermitCard
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay play)
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
-        // Grant temporary Strength (removed at end of turn via TemporaryStrengthPower)
+        // Grant temporary Strength using ScopeInStrengthPower (removes at end of turn)
         await PowerCmd.Apply<StrengthPower>(Owner.Creature, CurrentStr, Owner.Creature, this);
-        await PowerCmd.Apply<TemporaryStrengthPower>(Owner.Creature, CurrentStr, Owner.Creature, this);
+        await PowerCmd.Apply<ScopeInStrengthPower>(Owner.Creature, CurrentStr, Owner.Creature, this);
     }
 
-    protected override void OnUpgrade() { }
+    protected override void OnUpgrade()
+    {
+        DynamicVars["StrengthPower"].UpgradeValueBy(UpgradedStrAmt - StrAmt);
+    }
 }

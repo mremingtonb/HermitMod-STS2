@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 
@@ -27,6 +28,8 @@ public sealed class Gestalt : HermitCard
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     protected override IEnumerable<CardKeyword> CustomKeywords => [HermitKeywords.Rugged];
+
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromPower<VulnerablePower>()];
 
     private int CurrentRugged => IsUpgraded ? UpgradedRuggedAmt : RuggedAmt;
     private int CurrentVuln => IsUpgraded ? UpgradedVulnAmt : VulnAmt;

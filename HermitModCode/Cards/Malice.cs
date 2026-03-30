@@ -1,4 +1,5 @@
 using HermitMod.Cards;
+using HermitMod.Character;
 using HermitMod.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -22,6 +23,8 @@ public sealed class Malice : HermitCard
     public Malice() : base(2, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies) { }
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar((decimal)DamageAmount, ValueProp.Move)];
+
+    protected override IEnumerable<CardKeyword> CustomKeywords => [HermitKeywords.Bruise];
 
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay play)
     {

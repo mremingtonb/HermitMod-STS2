@@ -24,6 +24,12 @@ public abstract class HermitCard(int cost, CardType type, CardRarity rarity, Tar
     /// </summary>
     protected virtual IEnumerable<CardKeyword> CustomKeywords => [];
 
+    /// <summary>
+    /// Additional hover tips for this card (card previews, power tooltips, etc.).
+    /// Override in subclasses to add tooltips for generated cards, referenced powers, etc.
+    /// </summary>
+    protected virtual IEnumerable<IHoverTip> AdditionalHoverTips => [];
+
     protected override IEnumerable<IHoverTip> ExtraHoverTips
     {
         get
@@ -32,6 +38,8 @@ public abstract class HermitCard(int cost, CardType type, CardRarity rarity, Tar
                 yield return HoverTipFactory.FromKeyword(HermitKeywords.DeadOn);
             foreach (var kw in CustomKeywords)
                 yield return HoverTipFactory.FromKeyword(kw);
+            foreach (var tip in AdditionalHoverTips)
+                yield return tip;
         }
     }
 

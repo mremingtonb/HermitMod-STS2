@@ -93,7 +93,7 @@ public static class HermitVisualBuilder
         body.Owner = root;
 
         // Right arm (behind body, mostly hidden)
-        var rightArm = CreateSprite("RightArm", CharDir + "right_hand.png", new Vector2(38, -82));
+        var rightArm = CreateSprite("RightArm", CharDir + "right_hand.png", new Vector2(32, -78));
         rightArm.Rotation = 0.264f;
         waist.AddChild(rightArm);
         rightArm.Owner = root;
@@ -123,11 +123,11 @@ public static class HermitVisualBuilder
         waist.AddChild(head);
         head.Owner = root;
 
-        var hat = CreateSprite("Hat", CharDir + "hat.png", new Vector2(8, -40));
+        var hat = CreateSprite("Hat", CharDir + "hat.png", new Vector2(8, -46));
         head.AddChild(hat);
         hat.Owner = root;
 
-        var eye = CreateSprite("Eye", CharDir + "eye.png", new Vector2(10, -10));
+        var eye = CreateSprite("Eye", CharDir + "eye.png", new Vector2(14, -10));
         head.AddChild(eye);
         eye.Owner = root;
 
@@ -277,7 +277,7 @@ public static class HermitVisualBuilder
         anim.TrackSetPath(t, "Visuals/Waist/Head:position");
         anim.TrackSetInterpolationType(t, Animation.InterpolationType.Cubic);
         anim.TrackInsertKey(t, 0f, new Vector2(-2, -105));
-        anim.TrackInsertKey(t, 0.0833f, new Vector2(9.55f, -110.88f));
+        anim.TrackInsertKey(t, 0.0833f, new Vector2(9.55f, -110.88f)); // hit recoil head
         anim.TrackInsertKey(t, 0.5f, new Vector2(-2, -105));
 
         // Head rotation on hit

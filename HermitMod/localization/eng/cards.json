@@ -20,7 +20,7 @@
   "HERMITMOD-BODY_ARMOR.title": "Body Armor",
   "HERMITMOD-BODY_ARMOR.description": "Discard a card.\nGain {Block:diff()} Block.\nIf it was a non-Attack, gain {Block:diff()} Block again.",
   "HERMITMOD-SNIPE.title": "Snipe",
-  "HERMITMOD-SNIPE.description": "Your next [gold]Dead On[/gold] effect this turn triggers twice.",
+  "HERMITMOD-SNIPE.description": "Your next {SnipePower:diff()} [gold]Dead On[/gold] effect(s) this turn trigger twice.",
   "HERMITMOD-CALLED_SHOT.title": "Called Shot",
   "HERMITMOD-CALLED_SHOT.description": "Deal {Damage:diff()} damage.\nIf the last card played this turn triggered [gold]Dead On[/gold], draw a card.",
   "HERMITMOD-DISSOLVE.title": "Dissolve",

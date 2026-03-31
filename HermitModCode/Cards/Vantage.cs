@@ -23,7 +23,10 @@ public sealed class Vantage : HermitCard
 
     public Vantage() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.None) { }
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar((decimal)BlockAmount, ValueProp.Move)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new BlockVar((decimal)BlockAmount, ValueProp.Move),
+        new CardsVar("DrawUpgrade", DrawUpgradeCount)
+    ];
 
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay play)
     {
@@ -33,7 +36,7 @@ public sealed class Vantage : HermitCard
         if (DeadOnHelper.IsDeadOn)
         {
             DeadOnHelper.IncrementDeadOnCount();
-            int count = IsUpgraded ? UpgradedDrawUpgradeCount : DrawUpgradeCount;
+            int count = DynamicVars["DrawUpgrade"].IntValue;
             var drawn = await CardPileCmd.Draw(ctx, count, Owner, false);
             foreach (var card in drawn)
             {
@@ -45,6 +48,6 @@ public sealed class Vantage : HermitCard
 
     protected override void OnUpgrade()
     {
-        // Upgrade changes draw count from 1 to 2 (reflected in upgradeDescription)
+        DynamicVars["DrawUpgrade"].UpgradeValueBy(UpgradedDrawUpgradeCount - DrawUpgradeCount);
     }
 }

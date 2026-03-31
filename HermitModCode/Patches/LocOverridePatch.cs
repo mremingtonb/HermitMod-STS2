@@ -93,6 +93,18 @@ public static class LocOverridePatch
             // Malice: exhaust + conditional AoE
             ["HERMITMOD-MALICE.description"] =
                 "[gold]Exhaust[/gold] a card.\nDeal {Damage:diff()} damage.\nIf you Exhaust a Curse, deal {Damage:diff()} damage to ALL enemies instead.",
+
+            // Glare: uses DynamicVar for upgrade diff
+            ["HERMITMOD-GLARE.description"] =
+                "Apply {WeakPower:diff()} [gold]Weak[/gold] and [gold]Vulnerable[/gold].",
+
+            // Vantage: use DynamicVar for draw/upgrade count
+            ["HERMITMOD-VANTAGE.description"] =
+                "Gain {Block:diff()} Block.\n[gold]Dead On[/gold]: Draw and Upgrade {DrawUpgrade:diff()} card(s).",
+
+            // Virtue: use DynamicVar for reduce amount
+            ["HERMITMOD-VIRTUE.description"] =
+                "Reduce each debuff on you by {Reduce:diff()}.",
         };
     }
 

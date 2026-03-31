@@ -107,6 +107,7 @@
   "HERMITMOD-ETERNAL_FORM.description": "First 4 playable cards drawn at the start of each turn cost 1 less that turn.",
   "HERMITMOD-FULLY_LOADED.title": "Fully Loaded",
   "HERMITMOD-FULLY_LOADED.description": "Add ALL [gold]Strikes[/gold] and [gold]Defends[/gold] from your [gold]draw pile[/gold] to your hand.",
+  "HERMITMOD-FULLY_LOADED.upgradeDescription": "Add ALL [gold]Strikes[/gold] and [gold]Defends[/gold] from your [gold]draw pile[/gold] to your hand.\n[gold]Retain[/gold].",
   "HERMITMOD-GESTALT.title": "Gestalt",
   "HERMITMOD-GESTALT.description": "Gain {VulnerablePower:diff()} [gold]Vulnerable[/gold].\nGain {RuggedPower:diff()} [gold]Rugged[/gold].",
   "HERMITMOD-ROUNDHOUSE_KICK.title": "Roundhouse Kick",

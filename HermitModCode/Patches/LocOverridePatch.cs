@@ -94,6 +94,12 @@ public static class LocOverridePatch
             ["HERMITMOD-MALICE.description"] =
                 "[gold]Exhaust[/gold] a card.\nDeal {Damage:diff()} damage.\nIf you Exhaust a Curse, deal {Damage:diff()} damage to ALL enemies instead.",
 
+            // Fully Loaded: upgrade adds Retain
+            ["HERMITMOD-FULLY_LOADED.description"] =
+                "Add ALL [gold]Strikes[/gold] and [gold]Defends[/gold] from your [gold]draw pile[/gold] to your hand.",
+            ["HERMITMOD-FULLY_LOADED.upgradeDescription"] =
+                "Add ALL [gold]Strikes[/gold] and [gold]Defends[/gold] from your [gold]draw pile[/gold] to your hand.\n[gold]Retain[/gold].",
+
             // Glare: uses DynamicVar for upgrade diff
             ["HERMITMOD-GLARE.description"] =
                 "Apply {WeakPower:diff()} [gold]Weak[/gold] and [gold]Vulnerable[/gold].",

@@ -39,10 +39,10 @@ public sealed class GhostlyPresence : HermitCard
         if (DeadOnHelper.IsDeadOn)
         {
             DeadOnHelper.IncrementDeadOnCount();
-            // Upgrade handling simplified - base values used
+            int weak = DynamicVars["WeakPower"].IntValue;
             foreach (Creature enemy in CombatState.HittableEnemies)
             {
-                await PowerCmd.Apply<WeakPower>(enemy, 1, Owner.Creature, this);
+                await PowerCmd.Apply<WeakPower>(enemy, weak, Owner.Creature, this);
             }
         }
     }
@@ -50,5 +50,6 @@ public sealed class GhostlyPresence : HermitCard
     protected override void OnUpgrade()
     {
         DynamicVars.Block.UpgradeValueBy(UpgradedBlockAmount - BlockAmount);
+        DynamicVars["WeakPower"].UpgradeValueBy(UpgradedWeakAmount - WeakAmount);
     }
 }

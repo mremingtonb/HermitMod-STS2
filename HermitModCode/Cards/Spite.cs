@@ -15,7 +15,7 @@ namespace HermitMod.Cards;
 public sealed class Spite : HermitCard
 {
     private const int BlockAmount = 8;
-    private const int UpgradedBlockAmount = 8;
+    private const int UpgradedBlockAmount = 11;
     private const int DrawAmount = 3;
     private const int UpgradedDrawAmount = 4;
 

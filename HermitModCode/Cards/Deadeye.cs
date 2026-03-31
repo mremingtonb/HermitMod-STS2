@@ -31,8 +31,6 @@ public sealed class Deadeye : HermitCard
 
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromPower<StrengthPower>()];
 
-    private int CurrentStrength => IsUpgraded ? UpgradedStrengthAmt : StrengthAmt;
-
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay play)
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Attack", Owner.Character.AttackAnimDelay);
@@ -45,12 +43,14 @@ public sealed class Deadeye : HermitCard
         if (DeadOnHelper.IsDeadOn)
         {
             DeadOnHelper.IncrementDeadOnCount();
-            await PowerCmd.Apply<StrengthPower>(Owner.Creature, CurrentStrength, Owner.Creature, this);
+            int str = DynamicVars["StrengthPower"].IntValue;
+            await PowerCmd.Apply<StrengthPower>(Owner.Creature, str, Owner.Creature, this);
         }
     }
 
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(UpgradedDamageAmount - DamageAmount);
+        DynamicVars["StrengthPower"].UpgradeValueBy(UpgradedStrengthAmt - StrengthAmt);
     }
 }

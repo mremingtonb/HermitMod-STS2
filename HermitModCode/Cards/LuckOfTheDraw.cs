@@ -2,6 +2,7 @@ using HermitMod.Cards;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 
 namespace HermitMod.Cards;
@@ -17,16 +18,16 @@ public sealed class LuckOfTheDraw : HermitCard
 
     public LuckOfTheDraw() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self) { }
 
-    private int Threshold => IsUpgraded ? UpgradedCostThreshold : CostThreshold;
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar("Threshold", CostThreshold)];
 
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay play)
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
 
+        int threshold = DynamicVars["Threshold"].IntValue;
         int totalCost = 0;
-        var drawPile = PileType.Draw.GetPile(Owner);
 
-        while (totalCost < Threshold)
+        while (totalCost < threshold)
         {
             int handBefore = PileType.Hand.GetPile(Owner)?.Cards.Count ?? 0;
             await CardPileCmd.Draw(ctx, 1, Owner, false);
@@ -46,7 +47,6 @@ public sealed class LuckOfTheDraw : HermitCard
 
     protected override void OnUpgrade()
     {
-        // Upgrade changes threshold from 3 to 4 (reflected in description)
-        EnergyCost.UpgradeBy(0); // Force description refresh
+        DynamicVars["Threshold"].UpgradeValueBy(UpgradedCostThreshold - CostThreshold);
     }
 }

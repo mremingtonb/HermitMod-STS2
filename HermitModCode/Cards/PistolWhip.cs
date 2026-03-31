@@ -22,17 +22,17 @@ public class PistolWhip() : HermitCard(1, CardType.Attack, CardRarity.Common, Ta
 
     protected override IEnumerable<CardKeyword> CustomKeywords => [HermitKeywords.Bruise];
 
-    private int CurrentBruise => IsUpgraded ? UpgradedBruiseAmt : BruiseAmt;
-
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay play)
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Attack", Owner.Character.AttackAnimDelay);
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(play.Target).WithHermitBluntLightHitFx().Execute(ctx);
-        await PowerCmd.Apply<BruisePower>(play.Target, CurrentBruise, Owner.Creature, this);
+        int bruise = DynamicVars["BruisePower"].IntValue;
+        await PowerCmd.Apply<BruisePower>(play.Target, bruise, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(UpgradeDmg);
+        DynamicVars["BruisePower"].UpgradeValueBy(UpgradedBruiseAmt - BruiseAmt);
     }
 }

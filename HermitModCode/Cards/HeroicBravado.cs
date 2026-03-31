@@ -24,12 +24,14 @@ public sealed class HeroicBravado : HermitCard
 
     protected override IEnumerable<CardKeyword> CustomKeywords => [HermitKeywords.Rugged];
 
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar("CostReduce", CostReduction)];
+
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay play)
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
 
         // Reduce this card's cost for rest of combat
-        int reduction = IsUpgraded ? UpgradedCostReduction : CostReduction;
+        int reduction = DynamicVars["CostReduce"].IntValue;
         var newCost = Math.Max(0, (int)EnergyCost.GetWithModifiers(default) - reduction);
         EnergyCost.SetCustomBaseCost(newCost);
 
@@ -38,6 +40,6 @@ public sealed class HeroicBravado : HermitCard
 
     protected override void OnUpgrade()
     {
-        // Upgrade reduces cost reduction from 2 to 1 (handled in OnPlay)
+        DynamicVars["CostReduce"].UpgradeValueBy(UpgradedCostReduction - CostReduction);
     }
 }

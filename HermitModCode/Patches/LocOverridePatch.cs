@@ -111,6 +111,40 @@ public static class LocOverridePatch
             // Virtue: use DynamicVar for reduce amount
             ["HERMITMOD-VIRTUE.description"] =
                 "Reduce each debuff on you by {Reduce:diff()}.",
+
+            // Luck of the Draw: use DynamicVar for threshold
+            ["HERMITMOD-LUCK_OF_THE_DRAW.description"] =
+                "Draw cards until their total cost is {Threshold:diff()} or more.",
+
+            // Combo: use DynamicVar for power amount
+            ["HERMITMOD-COMBO.description"] =
+                "Put the first [gold]Dead On[/gold] card triggered each turn back into your hand.",
+            ["HERMITMOD-COMBO.upgradeDescription"] =
+                "Put the first {ComboPower:diff()} [gold]Dead On[/gold] cards triggered each turn back into your hand.",
+
+            // Deadeye: use DynamicVar for Strength
+            ["HERMITMOD-DEADEYE.description"] =
+                "Deal {Damage:diff()} damage.\n[gold]Dead On[/gold]: Gain {StrengthPower:diff()} [gold]Strength[/gold].",
+
+            // Ghostly Presence: use DynamicVar for Weak
+            ["HERMITMOD-GHOSTLY_PRESENCE.description"] =
+                "Gain {Block:diff()} Block.\n[gold]Dead On[/gold]: Apply {WeakPower:diff()} [gold]Weak[/gold] to ALL enemies.",
+
+            // Feint: use DynamicVar for Bruise
+            ["HERMITMOD-FEINT.description"] =
+                "Gain {Block:diff()} Block. Apply {BruisePower:diff()} [gold]Bruise[/gold] to ALL enemies.",
+
+            // Pistol Whip: use DynamicVar for Bruise
+            ["HERMITMOD-PISTOL_WHIP.description"] =
+                "Deal {Damage:diff()} damage. Apply {BruisePower:diff()} [gold]Bruise[/gold].",
+
+            // Spite: corrected block amount
+            ["HERMITMOD-SPITE.description"] =
+                "[gold]Exhaust[/gold] all [gold]Unplayable[/gold] cards in your hand. Gain {Block:diff()} Block. Draw {Cards:diff()} cards.",
+
+            // Heroic Bravado: use DynamicVar for cost reduction
+            ["HERMITMOD-HEROIC_BRAVADO.description"] =
+                "Gain 1 [gold]Rugged[/gold]. Reduce this card's cost by {CostReduce:diff()} this combat.",
         };
     }
 

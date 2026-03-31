@@ -21,22 +21,22 @@ public class Feint() : HermitCard(0, CardType.Skill, CardRarity.Common, TargetTy
 
     protected override IEnumerable<CardKeyword> CustomKeywords => [HermitKeywords.Bruise];
 
-    private int CurrentBruise => IsUpgraded ? UpgradedBruiseAmt : BruiseAmt;
-
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay play)
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
 
         // Apply Bruise to ALL enemies
+        int bruise = DynamicVars["BruisePower"].IntValue;
         foreach (var enemy in CombatState.HittableEnemies)
         {
-            await PowerCmd.Apply<BruisePower>(enemy, CurrentBruise, Owner.Creature, this);
+            await PowerCmd.Apply<BruisePower>(enemy, bruise, Owner.Creature, this);
         }
     }
 
     protected override void OnUpgrade()
     {
         DynamicVars.Block.UpgradeValueBy(UpgradeBlk);
+        DynamicVars["BruisePower"].UpgradeValueBy(UpgradedBruiseAmt - BruiseAmt);
     }
 }

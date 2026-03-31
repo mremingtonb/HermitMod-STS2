@@ -164,6 +164,5 @@
   "HERMITMOD-FROM_BEYOND.title": "From Beyond",
   "HERMITMOD-FROM_BEYOND.description": "For each card in your [gold]exhaust pile[/gold], a random enemy loses {HpLoss:diff()} HP.",
   "HERMITMOD-VIRTUE.title": "Virtue",
-  "HERMITMOD-VIRTUE.description": "Reduce each debuff on you by 1.",
-  "HERMITMOD-VIRTUE.upgradeDescription": "Reduce each debuff on you by 2."
+  "HERMITMOD-VIRTUE.description": "Reduce each debuff on you by {Reduce:diff()}."
 }

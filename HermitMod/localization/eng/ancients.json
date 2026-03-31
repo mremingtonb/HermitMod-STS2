@@ -2,5 +2,54 @@
   "THE_ARCHITECT.talk.HERMITMOD-HERMIT.0-0r.char": "Eat my dusty ass!",
   "THE_ARCHITECT.talk.HERMITMOD-HERMIT.0-0r.next": "...",
   "THE_ARCHITECT.talk.HERMITMOD-HERMIT.0-1r.ancient": "How rude!",
-  "THE_ARCHITECT.talk.HERMITMOD-HERMIT.0-attack": "..."
+  "THE_ARCHITECT.talk.HERMITMOD-HERMIT.0-attack": "...",
+
+  "DARV.talk.HERMITMOD-HERMIT.0-0.ancient": "Hey there, stranger! You look like you've seen better days. Lucky for you, Darv's got just the thing.",
+  "DARV.talk.HERMITMOD-HERMIT.0-0.next": "...",
+  "DARV.talk.HERMITMOD-HERMIT.1-0.ancient": "Back again, eh? The hat gives you away every time.",
+  "DARV.talk.HERMITMOD-HERMIT.1-0.next": "...",
+  "DARV.talk.HERMITMOD-HERMIT.2-0r.ancient": "Darv always has something for a lone wanderer.",
+  "DARV.talk.HERMITMOD-HERMIT.2-0r.next": "...",
+
+  "OROBAS.talk.HERMITMOD-HERMIT.0-0.ancient": "A solitary soul... how delightful. Tell me, what drives one to wander alone?",
+  "OROBAS.talk.HERMITMOD-HERMIT.0-0.next": "...",
+  "OROBAS.talk.HERMITMOD-HERMIT.1-0.ancient": "You return. The silence around you speaks louder than words.",
+  "OROBAS.talk.HERMITMOD-HERMIT.1-0.next": "...",
+  "OROBAS.talk.HERMITMOD-HERMIT.2-0r.ancient": "The lone gunslinger. I wonder what you seek this time.",
+  "OROBAS.talk.HERMITMOD-HERMIT.2-0r.next": "...",
+
+  "PAEL.talk.HERMITMOD-HERMIT.0-0.ancient": "You carry an old weight on your shoulders. Perhaps I can lighten it.",
+  "PAEL.talk.HERMITMOD-HERMIT.0-0.next": "...",
+  "PAEL.talk.HERMITMOD-HERMIT.1-0.ancient": "The wanderer returns. Your path is a winding one.",
+  "PAEL.talk.HERMITMOD-HERMIT.1-0.next": "...",
+  "PAEL.talk.HERMITMOD-HERMIT.2-0r.ancient": "Welcome back, Hermit. Shall we trade once more?",
+  "PAEL.talk.HERMITMOD-HERMIT.2-0r.next": "...",
+
+  "TANX.talk.HERMITMOD-HERMIT.0-0.ancient": "Hah! A loner with a gun. You remind me of someone I used to know.",
+  "TANX.talk.HERMITMOD-HERMIT.0-0.next": "...",
+  "TANX.talk.HERMITMOD-HERMIT.1-0.ancient": "Still alive? Impressive. Most don't make it back.",
+  "TANX.talk.HERMITMOD-HERMIT.1-0.next": "...",
+  "TANX.talk.HERMITMOD-HERMIT.2-0r.ancient": "You again. Let's make this quick.",
+  "TANX.talk.HERMITMOD-HERMIT.2-0r.next": "...",
+
+  "TEZCATARA.talk.HERMITMOD-HERMIT.0-0.ancient": "The dust of the road clings to you. Come, rest a moment.",
+  "TEZCATARA.talk.HERMITMOD-HERMIT.0-0.next": "...",
+  "TEZCATARA.talk.HERMITMOD-HERMIT.1-0.ancient": "Your footsteps are becoming familiar to me.",
+  "TEZCATARA.talk.HERMITMOD-HERMIT.1-0.next": "...",
+  "TEZCATARA.talk.HERMITMOD-HERMIT.2-0r.ancient": "The Hermit walks this path again. Fate is persistent.",
+  "TEZCATARA.talk.HERMITMOD-HERMIT.2-0r.next": "...",
+
+  "VAKUU.talk.HERMITMOD-HERMIT.0-0.ancient": "Interesting... you carry the scent of gunpowder and solitude.",
+  "VAKUU.talk.HERMITMOD-HERMIT.0-0.next": "...",
+  "VAKUU.talk.HERMITMOD-HERMIT.1-0.ancient": "The lone wanderer. Your resolve is admirable.",
+  "VAKUU.talk.HERMITMOD-HERMIT.1-0.next": "...",
+  "VAKUU.talk.HERMITMOD-HERMIT.2-0r.ancient": "Back once more. The spire draws us all in circles.",
+  "VAKUU.talk.HERMITMOD-HERMIT.2-0r.next": "...",
+
+  "NONUPEIPE.talk.HERMITMOD-HERMIT.0-0.ancient": "A traveler! And one who prefers their own company, I see.",
+  "NONUPEIPE.talk.HERMITMOD-HERMIT.0-0.next": "...",
+  "NONUPEIPE.talk.HERMITMOD-HERMIT.1-0.ancient": "Oh, it's you again! The quiet one with the hat.",
+  "NONUPEIPE.talk.HERMITMOD-HERMIT.1-0.next": "...",
+  "NONUPEIPE.talk.HERMITMOD-HERMIT.2-0r.ancient": "Welcome, welcome! Nonupeipe remembers a friend.",
+  "NONUPEIPE.talk.HERMITMOD-HERMIT.2-0r.next": "..."
 }

@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 
 namespace HermitMod.Cards;
@@ -20,12 +21,13 @@ public sealed class Virtue : HermitCard
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
 
-    private int CurrentReduce => IsUpgraded ? UpgradedReduceAmount : ReduceAmount;
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar("Reduce", ReduceAmount)];
 
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay play)
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
 
+        int reduceBy = DynamicVars["Reduce"].IntValue;
         var powers = Owner.Creature.Powers?.ToList();
         if (powers == null) return;
 
@@ -33,14 +35,13 @@ public sealed class Virtue : HermitCard
         {
             if (power.Type == PowerType.Debuff && power.Amount > 0)
             {
-                if (power.Amount <= CurrentReduce)
+                if (power.Amount <= reduceBy)
                 {
                     await PowerCmd.Remove(power);
                 }
                 else
                 {
-                    // Reduce the debuff by applying negative stacks
-                    await PowerCmd.Apply(power, Owner.Creature, -CurrentReduce, Owner.Creature, this);
+                    await PowerCmd.Apply(power, Owner.Creature, -reduceBy, Owner.Creature, this);
                 }
             }
         }
@@ -48,6 +49,6 @@ public sealed class Virtue : HermitCard
 
     protected override void OnUpgrade()
     {
-        // 1 -> 2 reduction (handled by CurrentReduce)
+        DynamicVars["Reduce"].UpgradeValueBy(UpgradedReduceAmount - ReduceAmount);
     }
 }
